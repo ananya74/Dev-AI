@@ -8,7 +8,6 @@ import { getUserByemail } from "@/data/user";
 import { generateTwoFactorToken, generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail,sendTwoFactorEmail } from "@/lib/mail";
 import { getTwoFactorAuthenticationTokenbyWmail } from "@/data/two-factor-token";
-import { error } from "console";
 import { db } from "@/lib/db";
 import { getTwoFactorAuthenticationTokenbyUserId } from "@/data/two-factor-confirmation";
 

@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
 import { SettingsSchema } from "@/schemas";
-import { error } from "console";
+
 import * as z from "zod";
 
 export const settings=async(
@@ -14,6 +14,10 @@ export const settings=async(
     const user=await currentUser();
     if(!user){
         return {error:"Unauthorised"}
+    }
+
+    if (!user.id) {
+        return { error: "Unauthorised" };
     }
 
     const dbUser=await getUserById(user.id);

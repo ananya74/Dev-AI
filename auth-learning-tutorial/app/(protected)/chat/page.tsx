@@ -22,6 +22,7 @@ export default function ChatPage() {
         const data = await res.json();
 
         // Flatten messages (if you have multiple chats)
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const allMessages = data.flatMap((chat: any) => chat.messages);
         setMessages(allMessages);
       }

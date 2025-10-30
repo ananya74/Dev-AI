@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+
 import { UserInfo } from "@/components/ui/user-info";
 import { currentUser } from "@/lib/auth";
 

@@ -1,5 +1,5 @@
 "use client";
-import { logout } from "@/actions/logout";
+
 import { settings } from "@/actions/settings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -18,7 +18,7 @@ import { useSession } from "next-auth/react";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { da } from "zod/v4/locales";
+
 
 
 
@@ -161,7 +161,7 @@ const SettingsPage= ()=>{
 
                                 <FormField
                                     control={form.control} 
-                                    name="newPassword"   
+                                    name="isTwoFactorEnabled"   
                                     render={({field})=>(
                                         <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                                             <div className="space-y-0.5">

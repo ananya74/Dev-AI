@@ -1,9 +1,9 @@
 "use server";
 import * as z from "zod";
 import { NewPasswordSchema } from "@/schemas";
-import { error } from "console";
+
 import { getPasswordResetTokenbyToken } from "@/data/password-reset-token";
-import { Darker_Grotesque } from "next/font/google";
+
 import { getUserByemail } from "@/data/user";
 import bcrypt from "bcrypt";
 import { db } from "@/lib/db";

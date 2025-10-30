@@ -30,6 +30,10 @@ export async function POST(req: Request) {
         return new NextResponse("Chat not found", { status: 404 });
       }
     } else {
+      if (!user.id) {
+        return new NextResponse("User ID missing", { status: 400 });
+      }
+      
       chat = await db.chat.create({
         data: {
           userId: user.id,
