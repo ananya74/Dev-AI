@@ -25,6 +25,8 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled   Boolean  @default(false)
   twoFactorConfirmation  TwoFactorConfirmation?
+  chats         Chat[]          // 1-to-many relationship
+  preferences   Json? 
 }
 
 model Account {
@@ -81,4 +83,22 @@ model TwoFactorConfirmation{
   userId        String
   user          User            @relation(fields: [userId],references: [id],onDelete: Cascade)
   @@unique([userId])
+}
+
+model Chat {
+  id        String     @id @default(cuid())
+  title     String?
+  createdAt DateTime   @default(now())
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String
+  messages  Message[]  // 1 chat → many messages
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  role      String   // "user" or "assistant"
+  content   String
+  createdAt DateTime @default(now())
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
 }

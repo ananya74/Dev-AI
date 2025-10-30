@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 export const Navbar=()=>{
     const pathname=usePathname();
     return(
-        <nav className="bg-secondary flex justify-between items-center p-4 rounded-xl w-[600px] shadow-sm">
-            <div className="flex gap-x-2">
+        <nav className="bg-secondary w-full max-w-2xl mx-auto flex flex-wrap justify-between items-center p-3 sm:p-4 rounded-xl shadow-sm gap-2">
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start w-full sm:w-auto">
                 <Button asChild variant={pathname === '/server' ? 'default' : 'outline'}>
                     <Link href="/server">
                         Server
@@ -22,6 +22,14 @@ export const Navbar=()=>{
                         Settings
                     </Link>
                 </Button>
+
+                <Button asChild variant={pathname === '/chat' ? 'default' : 'outline'}>
+                    <Link href="/chat">
+                        Chat
+                    </Link>
+                </Button>
+
+
             </div>
             <p><UserButton/></p>
         </nav>

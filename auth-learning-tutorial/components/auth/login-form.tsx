@@ -23,9 +23,18 @@ import Link from "next/link";
 export const LoginForm=()=>{
     const searchParams=useSearchParams();
     const urlError=searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : "";
+
+    //Local UI Setup
+    //Whether to show the extra input for a 2FA code
     const [showTwoFactor,setShowTwoFactor]=useState(false);
+
+    //Display server or validation error
     const [error,setError]=useState<string | undefined>("");
+
+    //Used to disable inputs/buttons during async submission
     const [isPending,setTransition]=useTransition();
+
+    //Show success message (e.g., “Login Successful”)
     const[success,setSuccess]=useState<string | undefined>("")
     const form=useForm<z.infer<typeof LoginSchema>>({
         resolver:zodResolver(LoginSchema),
@@ -37,6 +46,7 @@ export const LoginForm=()=>{
 
 
     const onSubmit =(values:z.infer<typeof LoginSchema>)=>{
+        //Resetting old messages
         setError("");
         setSuccess("");
         setTransition(()=>{
