@@ -59,7 +59,7 @@ const SettingsPage= ()=>{
     }
 
     return(
-        <div className="flex justify-center p-4 rounded-xl items-center min-h-screen px-4 sm:px-6 lg:px-8 bg-background">
+        <div className="flex justify-center p-4 rounded-xl items-center max-h-screen px-4 sm:px-6 lg:px-8 bg-background">
             <Card className="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl p-4 sm:p-6">
                 <CardHeader>
                     <p className="text-2xl sm:text-3xl font-semibold text-center">
