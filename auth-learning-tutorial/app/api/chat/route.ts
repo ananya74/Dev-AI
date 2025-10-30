@@ -38,7 +38,7 @@ export async function POST(req: Request) {
       });
     }
 
-    // 4️⃣ Store user's message
+    // Store user's message
     const userMessage = await db.message.create({
       data: {
         chatId: chat.id,
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // 5️⃣ Call Groq API (LLM)
+    //  Call Groq API (LLM)
     const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
     const data = await groqRes.json();
     const reply = data?.choices?.[0]?.message?.content || "No response";
 
-    // 6️⃣ Save assistant’s message in DB
+    //  Save assistant’s message in DB
     const assistantMessage = await db.message.create({
       data: {
         chatId: chat.id,
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // 7️⃣ Return the assistant’s reply and chat ID
+    // 7Return the assistant’s reply and chat ID
     return NextResponse.json({
       reply,
       chatId: chat.id,
