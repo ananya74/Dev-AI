@@ -59,8 +59,8 @@ const SettingsPage= ()=>{
     }
 
     return(
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-sky-400 to-blue-800 px-4">
-            <Card className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl p-6 sm:p-8 bg-white/90 backdrop-blur-md shadow-xl rounded-2xl">
+        <div className="flex justify-center p-4 rounded-xl items-center max-h-screen px-4 sm:px-6 lg:px-8 bg-background">
+            <Card className="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl p-4 sm:p-6">
                 <CardHeader>
                     <p className="text-2xl sm:text-3xl font-semibold text-center">
                         Settings
