@@ -34,6 +34,7 @@ export default function Home() {
  */
 
 'use client';
+import { signOut, useSession } from "next-auth/react";
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -48,6 +49,7 @@ import { LoginButton } from '@/components/auth/login-button';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     setIsVisible(true);
@@ -66,15 +68,33 @@ export default function Home() {
               <Shield className="w-8 h-8" />
               <span className="text-2xl font-bold">Dev AI</span>
             </div>
-            <LoginButton>
-              <Button
-                size="lg"
-                className="bg-white text-black hover:bg-gray-200 transition-all duration-300 hover:scale-105"
-              >
-                Sign In
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </LoginButton>
+
+            {status === "loading" ? (
+              <p className="text-gray-400">Loading...</p>
+            ) : session ? (
+              <div className="flex items-center space-x-3">
+                <span className="text-gray-300">
+                   Welcome, {session.user?.name || "User"}!
+                </span>
+                <Button
+                  size="sm"
+                  className="bg-gray-800 text-white hover:bg-gray-700"
+                  onClick={() => signOut()}
+                >
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <LoginButton>
+                <Button
+                  size="lg"
+                  className="bg-white text-black hover:bg-gray-200 transition-all duration-300 hover:scale-105"
+                >
+                  Sign In
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </LoginButton>
+            )}
             
           </nav>
         </header>
