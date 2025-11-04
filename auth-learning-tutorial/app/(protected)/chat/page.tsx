@@ -96,6 +96,7 @@ export default function ChatPage() {
     }
   }
 
+
   /** 📷 Image Upload */
   function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -147,9 +148,9 @@ export default function ChatPage() {
       const data = await res.json();
       const transcript = data.text || "Could not transcribe audio.";
 
-      setMessages((prev) => [...prev, { role: "user", content: transcript }]);
+      /* setMessages((prev) => [...prev, { role: "user", content: transcript }]); */
       setInput(transcript);
-      await sendMessage();
+      /* await sendMessage(); */
     } catch (err) {
       console.error("Transcription failed:", err);
     }
