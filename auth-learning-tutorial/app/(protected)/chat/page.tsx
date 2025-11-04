@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SendHorizonal, Bot, User, Mic, ImagePlus, X, StopCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -10,6 +10,11 @@ interface Message {
   role: "user" | "assistant";
   content: string;
   imageUrl?: string;
+  createdAt?: string;
+}
+interface ChatHistoryItem {
+  createdAt: string;
+  messages: Message[];
 }
 
 export default function ChatPage() {
@@ -29,17 +34,19 @@ export default function ChatPage() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  
+
   // Fetch chat history (newest last)
   useEffect(() => {
     async function fetchHistory() {
       const res = await fetch("/api/chat/history");
       if (res.ok) {
         const data = await res.json();
-        const allMessages = data
-          .flatMap((chat: any) => chat.messages)
+        const allMessages = (data as ChatHistoryItem[])
+          .flatMap((chat) => chat.messages)
           .sort(
-            (a: any, b: any) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            (a, b) =>
+              new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime()
           );
         setMessages(allMessages);
       }
@@ -201,11 +208,14 @@ export default function ChatPage() {
                     }}
                   />
                   {msg.imageUrl && (
-                    <img
+                    <Image
                       src={msg.imageUrl}
                       alt="Sent"
+                      width={160}
+                      height={160}
                       className="mt-2 w-40 h-40 object-cover rounded-lg border border-gray-600"
                     />
+
                   )}
                 </div>
               </div>
@@ -228,11 +238,14 @@ export default function ChatPage() {
       {/* Image Preview */}
       {previewUrl && (
         <div className="mt-3 relative">
-          <img
+          <Image
             src={previewUrl}
             alt="Preview"
+            width={128}
+            height={128}
             className="w-32 h-32 object-cover rounded-lg border border-gray-600"
           />
+
           <button
             onClick={() => {
               setPreviewUrl(null);

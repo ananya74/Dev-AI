@@ -117,7 +117,7 @@ export async function POST(req: Request) {
     const contentType = req.headers.get("content-type") || "";
     let message = "";
     let imageUrl: string | null = null;
-    let audioText: string | null = null;
+    
     let chatId: string | null = null;
 
     //  Handle FormData (image/audio uploads)
@@ -169,7 +169,9 @@ export async function POST(req: Request) {
       data: { chatId: chat.id, role: "user", content: message || "[Image]" },
     });
 
+    
     // Build Groq payload
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const payload: any = {
       model: imageUrl
         ? "meta-llama/llama-4-scout-17b-16e-instruct" // Vision model
