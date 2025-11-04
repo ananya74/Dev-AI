@@ -98,6 +98,7 @@ model Message {
   id        String   @id @default(cuid())
   role      String   // "user" or "assistant"
   content   String
+  imageUrl  String?
   createdAt DateTime @default(now())
   chat      Chat     @relation(fields: [chatId], references: [id])
   chatId    String

@@ -10,7 +10,7 @@ export async function GET() {
   const chats = await db.chat.findMany({
     where: { userId: session.user.id },
     include: { messages: true },
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: "asc" },
   });
 
   return NextResponse.json(chats);
